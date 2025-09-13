@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0e639c" />
+  <title>timucin.dev — Visual Portfolio</title>
+  <link rel="canonical" href="https://timucin.dev/" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="app" class="vscode theme-dark">
+      <!-- Title Bar -->
+      <header class="titlebar" role="banner">
+        <div class="window-drag-region">
+          <div class="titlebar-left">
+            <img class="logo" src="/assets/favicon.svg" alt="logo" />
+            <span class="title">timucin.dev — Visual Portfolio</span>
+          </div>
+          <div class="titlebar-right">
+            <button class="win-btn" title="Minimize" aria-label="Minimize">–</button>
+            <button class="win-btn" title="Maximize" aria-label="Maximize">▢</button>
+            <button class="win-btn close" title="Close" aria-label="Close">×</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="workbench">
+        <!-- Activity Bar -->
+        <nav class="activitybar" aria-label="Activity Bar">
+          <button class="activity-item active" data-view="explorer" title="Explorer" aria-label="Explorer">
+            <svg class="icon"><use href="/assets/icons.svg#files"></use></svg>
+          </button>
+          <button class="activity-item" data-view="search" title="Search" aria-label="Search">
+            <svg class="icon"><use href="/assets/icons.svg#search"></use></svg>
+          </button>
+          <button class="activity-item" data-view="scm" title="Source Control" aria-label="Source Control">
+            <svg class="icon"><use href="/assets/icons.svg#branch"></use></svg>
+          </button>
+          <button class="activity-item" data-view="run" title="Run & Debug" aria-label="Run & Debug">
+            <svg class="icon"><use href="/assets/icons.svg#play"></use></svg>
+          </button>
+          <button class="activity-item" data-view="extensions" title="Extensions" aria-label="Extensions">
+            <svg class="icon"><use href="/assets/icons.svg#extensions"></use></svg>
+          </button>
+          <div class="spacer"></div>
+          <button class="activity-item theme-toggle" title="Tema Değiştir (Ctrl+K Ctrl+T)" aria-label="Tema Değiştir">
+            <svg class="icon"><use href="/assets/icons.svg#sun"></use></svg>
+          </button>
+          <button class="activity-item account" title="Atakan Timuçin" aria-label="Kullanıcı">
+            <svg class="icon"><use href="/assets/icons.svg#account"></use></svg>
+          </button>
+        </nav>
+
+        <!-- Side Bar -->
+        <aside class="sidebar" aria-label="Side Bar">
+          <div class="sidebar-header">
+            <span class="sidebar-title">EXPLORER</span>
+            <div class="sidebar-actions">
+              <button class="icon-btn" title="Yeni Dosya">
+                <svg class="icon"><use href="/assets/icons.svg#new-file"></use></svg>
+              </button>
+              <button class="icon-btn" title="Yeni Klasör">
+                <svg class="icon"><use href="/assets/icons.svg#new-folder"></use></svg>
+              </button>
+            </div>
+          </div>
+          <div class="folder">
+            <div class="folder-header" data-toggle>timucin.dev</div>
+            <ul class="file-tree">
+              <li class="file" data-file="README.md">
+                <svg class="icon"><use href="/assets/icons.svg#markdown"></use></svg>
+                <span>README.md</span>
+              </li>
+              <li class="file" data-file="about.ts">
+                <svg class="icon"><use href="/assets/icons.svg#ts"></use></svg>
+                <span>about.ts</span>
+              </li>
+              <li class="file" data-file="projects.json">
+                <svg class="icon"><use href="/assets/icons.svg#json"></use></svg>
+                <span>projects.json</span>
+              </li>
+              <li class="file" data-file="contact.html">
+                <svg class="icon"><use href="/assets/icons.svg#html"></use></svg>
+                <span>contact.html</span>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Main (Editor) -->
+        <main class="editor">
+          <div class="tabs" role="tablist" aria-label="Editor Tabs"></div>
+          <div class="editor-scroll">
+            <section id="editor-content" class="editor-content" role="tabpanel" tabindex="0" aria-label="Editor"></section>
+          </div>
+          <div class="panel hidden" id="panel" aria-label="Panel">
+            <div class="panel-toolbar">
+              <div class="panel-tabs">
+                <button class="panel-tab active" data-panel="terminal">Terminal</button>
+                <button class="panel-tab" data-panel="output">Output</button>
+              </div>
+              <div class="panel-actions">
+                <button class="icon-btn" id="toggle-panel" title="Paneli Gizle (Ctrl+J)"><svg class="icon"><use href="/assets/icons.svg#chevron-down"></use></svg></button>
+              </div>
+            </div>
+            <div class="panel-body" id="panel-body">
+              <pre class="terminal" id="terminal">
+Welcome to timucin.dev
+----------------------
+Kısayollar: Ctrl+B (Sidebar), Ctrl+P (Hızlı Aç), Ctrl+J (Panel), Ctrl+K Ctrl+T (Tema)
+              </pre>
+              <div class="output hidden" id="output">
+                <pre>Build succeeded. 0 errors, 0 warnings.</pre>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Status Bar -->
+      <footer class="statusbar" role="contentinfo">
+        <div class="status-left">
+          <span class="status-item clickable" id="toggle-sidebar">
+            <svg class="icon"><use href="/assets/icons.svg#files"></use></svg> Explorer
+          </span>
+          <span class="status-item"><svg class="icon"><use href="/assets/icons.svg#branch"></use></svg> main</span>
+        </div>
+        <div class="status-right">
+          <span class="status-item">UTF-8</span>
+          <span class="status-item">LF</span>
+          <span class="status-item">Spaces: 2</span>
+          <span class="status-item">TypeScript</span>
+          <span class="status-item">Ln 1, Col 1</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Quick Open (Ctrl+P) -->
+    <dialog id="quick-open" class="quick-open">
+      <form method="dialog" class="quick-open-form" autocomplete="off">
+        <input id="quick-open-input" type="text" placeholder="Dosya ara..." aria-label="Dosya ara" />
+        <ul id="quick-open-list" class="quick-open-list" role="listbox"></ul>
+      </form>
+    </dialog>
+
+    <!-- In-app file contents as templates -->
+    <script type="application/json" id="file-README.md">
+      {
+        "language": "markdown",
+        "content": "# Atakan Timuçin\n\nMerhaba! Ben **Atakan Timuçin**. Full‑stack geliştiriciyim; web performansı, geliştirici deneyimi (DX) ve UI mühendisliği alanlarına odaklanıyorum.\n\n## Yetenekler\n- TypeScript, React, Next.js, Node.js\n- CSS mimarisi, Tasarım sistemleri, Erişilebilirlik (a11y)\n- API tasarımı, PostgreSQL, Prisma\n- Bulut: Vercel, Docker, CI/CD\n\n## Deneyim\n- 2022–2025: Frontend/Full‑stack Geliştirici — çeşitli ürünlerde performans ve kalite odaklı geliştirme\n\n## Öne Çıkan Projeler\n- timucin.dev — VS Code görünümünde portfolyo\n- Tasarım sistemi bileşenleri\n\nDaha fazlası için kenardaki dosyaları açabilir ya da Ctrl+P ile hızlıca arayabilirsiniz.\n"
+      }
+    </script>
+    <script type="application/json" id="file-about.ts">
+      {
+        "language": "typescript",
+        "content": "export type Profile = {\n  name: string;\n  role: string;\n  location: string;\n  interests: string[];\n};\n\nexport const atakan: Profile = {\n  name: 'Atakan Timuçin',\n  role: 'Full‑stack Developer',\n  location: 'Türkiye',\n  interests: ['DX', 'UI Engineering', 'Performance', 'Open Source'],\n};\n\nexport function sayHello(p: Profile) {\n  return `Hello, ${p.name}!`;\n}\n"
+      }
+    </script>
+    <script type="application/json" id="file-projects.json">
+      {
+        "language": "json",
+        "content": "{\n  \"projects\": [\n    {\n      \"name\": \"Visual Portfolio\",\n      \"stack\": [\"TypeScript\", \"PWA\"],\n      \"summary\": \"VS Code arayüzünde portfolyo deneyimi\"\n    },\n    {\n      \"name\": \"Design System\",\n      \"stack\": [\"React\", \"Storybook\"],\n      \"summary\": \"Ölçeklenebilir UI bileşenleri\"\n    }\n  ]\n}\n"
+      }
+    </script>
+    <script type="application/json" id="file-contact.html">
+      {
+        "language": "html",
+        "content": "<section class=\"contact\">\n  <h1>İletişim</h1>\n  <ul>\n    <li>GitHub: <a href=\"https://github.com/WorkAndMetal\" target=\"_blank\" rel=\"noreferrer\">WorkAndMetal</a></li>\n    <li>LinkedIn: <a href=\"#\" target=\"_blank\" rel=\"noreferrer\">linkedin.com/in/atakan-timucin</a></li>\n    <li>E‑posta: <a href=\"mailto:atakan@example.com\">atakan@example.com</a></li>\n  </ul>\n</section>\n"
+      }
+    </script>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+  </html>
