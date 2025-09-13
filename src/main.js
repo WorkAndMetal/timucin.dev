@@ -100,22 +100,62 @@ function renderEditor() {
       html = `<pre><code>${escapeHtml(content)}</code></pre>`;
   }
   editorEl.setAttribute('aria-label', `${active.title} — ${language}`);
+  editorEl.classList.toggle('markdown', language === 'markdown');
   editorEl.innerHTML = html;
 }
 
 function markdownToHtml(md) {
-  // ultra light MD -> HTML (headings, bold, links, lists, paragraphs)
-  let html = md
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-    .replace(/\[(.*?)\]\((.*?)\)/gim, '<a href="$2" target="_blank" rel="noreferrer">$1<\/a>')
-    .replace(/^\- (.*$)/gim, '<li>$1</li>')
-    .replace(/\n\n/g, '</p><p>');
-  html = `<p>${html}</p>`;
-  html = html.replace(/<li>(.*?)<\/li>/g, '<ul><li>$1</li></ul>');
+  const lines = md.split(/\r?\n/);
+  let html = '';
+  let inList = false;
+  let para = [];
+
+  const applyInline = (s) => {
+    // links
+    s = s.replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+    // bold then italics
+    s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/\*(.+?)\*/g, '<em>$1</em>');
+    // inline code
+    s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+    return s;
+  };
+
+  const flushPara = () => {
+    if (para.length) {
+      html += `<p>${applyInline(para.join(' '))}</p>`;
+      para = [];
+    }
+  };
+  const closeList = () => { if (inList) { html += '</ul>'; inList = false; } };
+
+  for (let raw of lines) {
+    const line = raw.replace(/\s+$/,'');
+    if (!line.trim()) { // blank line
+      flushPara();
+      closeList();
+      continue;
+    }
+    const h = line.match(/^(#{1,6})\s+(.*)$/);
+    if (h) {
+      flushPara();
+      closeList();
+      const lvl = h[1].length;
+      html += `<h${lvl}>${applyInline(h[2].trim())}</h${lvl}>`;
+      continue;
+    }
+    const li = line.match(/^[-*]\s+(.*)$/);
+    if (li) {
+      flushPara();
+      if (!inList) { html += '<ul>'; inList = true; }
+      html += `<li>${applyInline(li[1])}</li>`;
+      continue;
+    }
+    // paragraph
+    para.push(line.trim());
+  }
+  flushPara();
+  closeList();
   return html;
 }
 
