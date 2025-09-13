@@ -1,4 +1,4 @@
-const CACHE = 'timucin-dev-v1';
+const CACHE = 'timucin-dev-v2';
 const ASSETS = [
   '/',
   '/index.html',
