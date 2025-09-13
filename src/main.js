@@ -109,6 +109,9 @@ function markdownToHtml(md) {
   let html = '';
   let inList = false;
   let para = [];
+  let inCode = false;
+  let codeLang = '';
+  let codeLines = [];
 
   const applyInline = (s) => {
     // links
@@ -131,6 +134,26 @@ function markdownToHtml(md) {
 
   for (let raw of lines) {
     const line = raw.replace(/\s+$/,'');
+    // fenced code block start/end
+    const fence = line.match(/^```\s*([a-zA-Z0-9+-]*)\s*$/);
+    if (fence) {
+      if (!inCode) {
+        // open
+        flushPara();
+        closeList();
+        inCode = true;
+        codeLang = fence[1] || '';
+        codeLines = [];
+      } else {
+        // close
+        const code = escapeHtml(codeLines.join('\n'));
+        const langClass = codeLang ? ` class=\"language-${codeLang}\"` : '';
+        html += `<pre><code${langClass}>${code}</code></pre>`;
+        inCode = false; codeLang=''; codeLines=[];
+      }
+      continue;
+    }
+    if (inCode) { codeLines.push(raw); continue; }
     if (!line.trim()) { // blank line
       flushPara();
       closeList();
