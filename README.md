@@ -1,29 +1,33 @@
-timucin.dev — VS Code benzeri portfolyo
-======================================
+## Miesta QR Menü
 
-Bu depo, Atakan Timuçin için Visual Studio Code arayüzüne benzeyen, statik/PWA destekli bir portfolyo sitesidir.
+Miesta Bakırköy için Next.js 14 (App Router), TypeScript ve Tailwind CSS kullanılarak hazırlanmış yumuşak tonlu QR menü deneyimi. Tasarım, chill kafe atmosferini vurgulayan pastel degradeler, cam efektli kartlar ve mobil odaklı bir yerleşim içerir.
 
-Özellikler
-- VS Code benzeri layout: Activity Bar, Sidebar (Explorer), Tab bar, Editor, Panel, Status Bar
-- Dosya sekmeleri ve içerik görüntüleme (Markdown/HTML/Code)
-- Quick Open (Ctrl+P), Panel (Ctrl+J), Sidebar (Ctrl+B), Tema (Ctrl+K Ctrl+T)
-- Light/Dark tema ve kalıcılık (localStorage)
-- PWA: manifest + service worker ile offline cache
+## Çalıştırma
 
-Geliştirme
-- Herhangi bir statik sunucu ile çalışır. Örn:
+```bash
+npm install
+npm run dev
+```
 
-  1) Python ile hızlı sunucu
-	  python3 -m http.server 8000
+Ardından tarayıcıdan `http://localhost:3000` adresini ziyaret ederek menüyü görüntüleyebilirsiniz.
 
-  2) Node ile (serve kuruluysa)
-	  npx serve . -p 8000
+## Öne Çıkanlar
 
-  Ardından tarayıcıda http://localhost:8000 adresini açın.
+- Hero bölümünde adres, çalışma saatleri ve QR kod kartı ile hızlı giriş.
+- `menuSections` verisi üzerinden dinamik olarak oluşturulan menü kartları.
+- Her ürün için pastel çizimli yerel görseller ve tag rozetleriyle kolay filtreleme.
 
-Dağıtım
-- Vercel, Netlify, GitHub Pages gibi statik barındırmaya uygundur.
+## Yapı
 
-Lisans
-- MIT
-# timucin.dev
+- `src/app/page.tsx`: Sayfa düzeni, hero blok, QR kartı ve menü ızgarası.
+- `src/components/MenuSection.tsx`: Bir menü bölümündeki ürün kartlarını render eden bileşen.
+- `src/data/menu.ts`: Menü kategorileri ve ürün içerikleri için tek kaynaklı veri dosyası.
+- `public/images/*.svg`: Ürün kartlarında kullanılan pastel tonlu örnek görseller.
+- `public/qr-miesta.svg`: Demo amaçlı QR görseli (gerçek kod ile değiştirilmeli).
+
+## Özelleştirme İpuçları
+
+- Menüde fiyat veya tanım güncellemek için `src/data/menu.ts` dosyasını düzenleyin.
+- Yeni kategori eklerken aynı dosyada `menuSections` dizisine yeni bir nesne ekleyin.
+- Renk tonları ve gölgeler Tailwind sınıfları üzerinden düzenlenebilir.
+- `public/qr-miesta.svg` dosyasını gerçek QR kodunuzla değiştirerek menüyü yayına hazır hale getirin.
