@@ -1,9 +1,0 @@
-<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="200" height="200" rx="28" fill="#F4F5FE"/>
-  <path d="M80 48H120L114 152C113 166 102 176 88 176H112C98 176 87 166 86 152L80 48Z" fill="#E1E3FB"/>
-  <rect x="88" y="68" width="32" height="60" rx="14" fill="#B7B9F5"/>
-  <rect x="84" y="130" width="40" height="16" rx="8" fill="#CED0F8"/>
-  <path d="M120 86C134 86 140 96 138 110C136 124 126 130 118 130V118C122 118 126 114 126 108C126 102 122 98 118 98V86H120Z" fill="#F2C5DA"/>
-  <ellipse cx="100" cy="58" rx="30" ry="10" fill="#F6E6F3"/>
-  <ellipse cx="100" cy="58" rx="20" ry="6" fill="#E4A9CB"/>
-</svg>
